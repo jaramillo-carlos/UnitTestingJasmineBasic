@@ -3,24 +3,24 @@ import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 import { of } from 'rxjs';
 import { User } from './models/user.interface';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 
 describe('AppComponent', () => {
 
 
-  let appComponent;
-  let servicio;
-  //afterAll
-  //afterEach
-  //beforeEach
-  //beforeAll
+  let appComponent: AppComponent
+  let servicio: UserService
+  // afterAll
+  // afterEach
+  // beforeEach
+  // beforeAll
 
-  beforeAll(()=>{
+  beforeAll(() => {
     console.log('beforeAll Se ejecuta al iniciar las pruebas')
   })
 
-  afterAll(()=>{
+  afterAll(() => {
     console.log('afterAll Se ejecuta al finalizar las pruebas')
   })
 
@@ -29,104 +29,96 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers:[
+      providers: [
         UserService,
         AppComponent
       ],
       imports:[
-       HttpClientTestingModule 
+       HttpClientTestingModule
       ]
-    }).compileComponents();
+    }).compileComponents()
     console.log('beforeEach')
     appComponent = TestBed.get(AppComponent)
     servicio = TestBed.get(UserService)
   }));
 
-  afterEach(()=>{
+  afterEach(() => {
     console.log('afterEach')
   })
 
-
   it('Debe crear un componente', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    const fixture = TestBed.createComponent(AppComponent)
+    const app = fixture.debugElement.componentInstance
+    expect(app).toBeTruthy()
   }));
 
-  
-  it('El valor de myVar debe ser Hola Mundo', ()=>{
+  it('El valor de myVar debe ser Hola Mundo', () => {
     const valor = appComponent.myVar
     expect(valor).toEqual('Hola Mundo')
   })
 
-
-  it('La variable saludo debe contener Carlos', ()=>{
+  it('La variable saludo debe contener Carlos', () => {
     const valor = appComponent.saludo
     expect(valor).toContain('Carlos')
   })
 
-
-  it('Debe retornar TRUE', ()=>{
+  it('Debe retornar TRUE', () => {
     const respuesta = appComponent.par(44)
     expect(respuesta).toBeTruthy()
   })
 
-  it('Debe retornar FALSE', ()=>{
+  it('Debe retornar FALSE', () => {
     const respuesta = appComponent.par(15)
     expect(respuesta).toBeFalsy()
   })
-  
-  it('Debe llamar a UserService y el metodo getAll() para obtener los usuarios', ()=>{
-    
-        //Mock = Objeto simulado de nuestra respuesta
-        let mockUser:User[] = [
-          {
-          login: "mojombo",
-          id: 1,
-          node_id: "MDQ6VXNlcjE=",
-          avatar_url: "https://avatars0.githubusercontent.com/u/1?v=4",
-          gravatar_id: "",
-          url: "https://api.github.com/users/mojombo",
-          html_url: "https://github.com/mojombo",
-          followers_url: "https://api.github.com/users/mojombo/followers",
-          following_url: "https://api.github.com/users/mojombo/following{/other_user}",
-          gists_url: "https://api.github.com/users/mojombo/gists{/gist_id}",
-          starred_url: "https://api.github.com/users/mojombo/starred{/owner}{/repo}",
-          subscriptions_url: "https://api.github.com/users/mojombo/subscriptions",
-          organizations_url: "https://api.github.com/users/mojombo/orgs",
-          repos_url: "https://api.github.com/users/mojombo/repos",
-          events_url: "https://api.github.com/users/mojombo/events{/privacy}",
-          received_events_url: "https://api.github.com/users/mojombo/received_events",
-          type: "User",
-          site_admin: false
-        },
-        {
-          login: "defunkt",
-          id: 2,
-          node_id: "MDQ6VXNlcjI=",
-          avatar_url: "https://avatars0.githubusercontent.com/u/2?v=4",
-          gravatar_id: "",
-          url: "https://api.github.com/users/defunkt",
-          html_url: "https://github.com/defunkt",
-          followers_url: "https://api.github.com/users/defunkt/followers",
-          following_url: "https://api.github.com/users/defunkt/following{/other_user}",
-          gists_url: "https://api.github.com/users/defunkt/gists{/gist_id}",
-          starred_url: "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
-          subscriptions_url: "https://api.github.com/users/defunkt/subscriptions",
-          organizations_url: "https://api.github.com/users/defunkt/orgs",
-          repos_url: "https://api.github.com/users/defunkt/repos",
-          events_url: "https://api.github.com/users/defunkt/events{/privacy}",
-          received_events_url: "https://api.github.com/users/defunkt/received_events",
-          type: "User",
-          site_admin: true
-        }];
-    const users = spyOn(servicio, 'getAll').and.callFake( users =>{
+
+  it('Debe llamar a UserService y el metodo getAll() para obtener los usuarios', () => {
+    // Mock = Objeto simulado de nuestra respuesta
+    const mockUser: User[] = [
+      {
+      login: "mojombo",
+      id: 1,
+      node_id: "MDQ6VXNlcjE=",
+      avatar_url: "https://avatars0.githubusercontent.com/u/1?v=4",
+      gravatar_id: "",
+      url: "https://api.github.com/users/mojombo",
+      html_url: "https://github.com/mojombo",
+      followers_url: "https://api.github.com/users/mojombo/followers",
+      following_url: "https://api.github.com/users/mojombo/following{/other_user}",
+      gists_url: "https://api.github.com/users/mojombo/gists{/gist_id}",
+      starred_url: "https://api.github.com/users/mojombo/starred{/owner}{/repo}",
+      subscriptions_url: "https://api.github.com/users/mojombo/subscriptions",
+      organizations_url: "https://api.github.com/users/mojombo/orgs",
+      repos_url: "https://api.github.com/users/mojombo/repos",
+      events_url: "https://api.github.com/users/mojombo/events{/privacy}",
+      received_events_url: "https://api.github.com/users/mojombo/received_events",
+      type: "User",
+      site_admin: false
+    },
+    {
+      login: "defunkt",
+      id: 2,
+      node_id: "MDQ6VXNlcjI=",
+      avatar_url: "https://avatars0.githubusercontent.com/u/2?v=4",
+      gravatar_id: "",
+      url: "https://api.github.com/users/defunkt",
+      html_url: "https://github.com/defunkt",
+      followers_url: "https://api.github.com/users/defunkt/followers",
+      following_url: "https://api.github.com/users/defunkt/following{/other_user}",
+      gists_url: "https://api.github.com/users/defunkt/gists{/gist_id}",
+      starred_url: "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+      subscriptions_url: "https://api.github.com/users/defunkt/subscriptions",
+      organizations_url: "https://api.github.com/users/defunkt/orgs",
+      repos_url: "https://api.github.com/users/defunkt/repos",
+      events_url: "https://api.github.com/users/defunkt/events{/privacy}",
+      received_events_url: "https://api.github.com/users/defunkt/received_events",
+      type: "User",
+      site_admin: true
+    }];
+    const users = spyOn(servicio, 'getAll').and.callFake( (res: User[]) => {
       return of(mockUser)
     } )
-
-    appComponent.ngOnInit()
-
-    expect(users).toHaveBeenCalled()
+    appComponent.ngOnInit() // Llamar función del componente que hace la petición a getAll()
+    expect(users).toHaveBeenCalled() // Comprobar que este espia se ha llamado
   })
-  
-});
+})

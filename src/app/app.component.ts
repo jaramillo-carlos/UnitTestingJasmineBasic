@@ -12,10 +12,9 @@ export class AppComponent implements OnInit {
   saludo = 'Buenos dias Carlos, como te encuentras?'
   users: User[] = []
 
-
   constructor(private _userService: UserService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.getUsers()
   }
 
@@ -23,7 +22,7 @@ export class AppComponent implements OnInit {
     return numero % 2 === 0 ? true : false
   }
 
-  getUsers(){
+  getUsers() {
     this._userService.getAll().subscribe(users => {
       this.users = users
       console.log(this.users)
